@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            color: #343a40;
+            margin: 20px;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .product-image {
+            max-width: 300px;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .product {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        .price {
+            font-size: 1.2em;
+            color: #007bff;
+        }
+        .earned-money {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #dc3545;
+        }
+        .account-balance {
+            font-size: 1.2em;
+            margin-top: 20px;
+            color: #28a745;
+        }
+        .done-button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .done-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Selected Item</h1>
+        <div class="account-balance" id="account-balance"></div>
+        <div class="earned-money" id="earned-money"></div>
+        <img id="product-image" class="product-image" src="" alt="Selected Product Image">
+        <div class="product" id="selected-product"></div>
+        <div class="price" id="product-price"></div>
+        <button class="done-button" onclick="completeTask()">Done</button>
+    </div>
+
+    <script>
+        // List of items with associated images
+        const items = [
+            { name: "Microsoft Surface Pro 9 with Keyboard Batch No: SP-MS20231105", image: "vip13.jpg" },
+            { name: "Sony WH-1000XM5 Noise Cancelling Headphones Batch No: HP-SY20231018", image: "vip13.jpg" },
+            { name: "Bose QuietComfort Earbuds II Batch No: EB-BQ20231112", image: "vip13.jpg" },
+            { name: "Logitech MX Master 3S Wireless Mouse Batch No: MO-LG20231030", image: "vip13.jpg" },
+            { name: "JBL Charge 5 Portable Bluetooth Speaker Batch No: SP-JB20231203", image: "vip13.jpg" },
+        ];
+
+        // Select a random item from the list
+        const randomIndex = Math.floor(Math.random() * items.length);
+        const selectedItem = items[randomIndex];
+
+        // Generate a random price between 1000 and 900
+        const randomPrice = Math.floor(Math.random() * (1000 - 900 + 1)) + 900;
+
+        // Calculate earned money as 3% of the random price
+        const earnedMoney = (randomPrice * 3) / 100;
+
+        // Retrieve account balance from localStorage and update it
+        let accountBalance = parseFloat(localStorage.getItem('updatedBalance')) || 0;
+        accountBalance += earnedMoney;
+
+        // Update the account balance in localStorage
+        localStorage.setItem('updatedBalance', accountBalance);
+
+        // Display the selected product details
+        document.getElementById('product-image').src = selectedItem.image;
+        document.getElementById('product-image').alt = `${selectedItem.name} Image`;
+        document.getElementById('selected-product').textContent = selectedItem.name;
+        document.getElementById('product-price').textContent = `Price: ₹${randomPrice}`;
+        document.getElementById('earned-money').textContent = `Earned Money: ₹${earnedMoney.toFixed(2)}`;
+        document.getElementById('account-balance').textContent = `Updated Account Balance: ₹${accountBalance.toFixed(2)}`;
+
+        // Function to mark task as complete and go back
+        function completeTask() {
+            const currentTask = parseInt(localStorage.getItem('currentTask')) || 0;
+
+            // Mark the task as completed
+            let completedTasks = parseInt(localStorage.getItem('completedTasks')) || 0;
+
+            if (currentTask) {
+                completedTasks = Math.max(completedTasks, currentTask);
+                localStorage.setItem('completedTasks', completedTasks);
+                localStorage.removeItem('currentTask'); // Clear the current task marker
+            }
+
+            // Redirect back to the progress page
+            window.location.href = "vip3.html"; // Update to the actual progress page URL
+        }
+    </script>
+</body>
+</html>

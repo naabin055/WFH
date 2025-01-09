@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Progress with Details</title>
+    <style>
+        /* Styling remains unchanged */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .content {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .progress-section {
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-header {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .progress-bar {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 20px;
+            margin: 10px 0;
+        }
+
+        .progress-bar div {
+            height: 100%;
+            background-color: #007bff;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .task-details {
+            margin-top: 20px;
+        }
+
+        .task-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .task-details th, .task-details td {
+            border: 1px solid #ced4da;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .task-details th {
+            background-color: #f8f9fa;
+        }
+
+        .image-section {
+            flex: 0.5;
+            background-color: #ffffff;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            height: 300px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-section img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+        }
+
+        button, .back-to-home {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        button:hover, .back-to-home:hover {
+            background-color: #0056b3;
+        }
+
+        .back-to-home-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="progress-section">
+                <div class="progress-header">Task Progress</div>
+                <div class="progress-bar">
+                    <div id="progress" style="width: 0%;"></div>
+                </div>
+                <div>Completed: <span id="completed-tasks">0</span> / <span id="total-tasks">15</span></div>
+                <button id="start-task">Start Task</button>
+                <div class="task-details">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="task-list">
+                            <!-- Dynamic tasks will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="image-section">
+            <img src="vip11.jpg" alt="Task Image">
+        </div>
+    </div>
+    <div class="back-to-home-container">
+        <a href="WFH online.html" class="back-to-home">Back to Home Page</a>
+    </div>
+
+    <script>
+        const totalTasks = 15;
+        const taskList = document.getElementById('task-list');
+        const progressElement = document.getElementById('progress');
+        const completedTasksElement = document.getElementById('completed-tasks');
+        const startTaskButton = document.getElementById('start-task');
+
+        let completedTasks = parseInt(localStorage.getItem('completedTasks')) || 0;
+
+        // Get the last reset timestamp from localStorage
+        const lastReset = localStorage.getItem('lastReset');
+        const currentTime = new Date();
+        const resetHour = 9; // Reset time: 9 AM
+
+        // Check if tasks need to be reset
+        function checkAndResetTasks() {
+            const lastResetDate = lastReset ? new Date(lastReset) : null;
+            const now = new Date();
+
+            if (
+                !lastResetDate || // If no reset has occurred yet
+                (now > new Date(lastResetDate.getFullYear(), lastResetDate.getMonth(), lastResetDate.getDate(), resetHour) && // After the reset hour
+                 now.getDate() !== lastResetDate.getDate()) // On a new day
+            ) {
+                completedTasks = 0; // Reset task count
+                localStorage.setItem('completedTasks', completedTasks);
+                localStorage.setItem('lastReset', now); // Update reset timestamp
+                initializeTasks();
+            }
+        }
+
+        // Initialize tasks
+        function initializeTasks() {
+            taskList.innerHTML = '';
+            for (let i = 1; i <= totalTasks; i++) {
+                const row = document.createElement('tr');
+                const taskCell = document.createElement('td');
+                const statusCell = document.createElement('td');
+
+                taskCell.textContent = `Task ${i}`;
+                statusCell.textContent = i <= completedTasks ? 'Complete' : 'Incomplete';
+                statusCell.dataset.taskId = i;
+
+                row.appendChild(taskCell);
+                row.appendChild(statusCell);
+                taskList.appendChild(row);
+            }
+            updateProgress();
+        }
+
+        // Update progress bar and completed count
+        function updateProgress() {
+            completedTasksElement.textContent = completedTasks;
+            progressElement.style.width = `${(completedTasks / totalTasks) * 100}%`;
+        }
+
+        // Start a task
+        startTaskButton.addEventListener('click', () => {
+            if (completedTasks >= totalTasks) {
+                alert("You have completed all 15 tasks for today. Please wait until tomorrow!");
+                return; // Prevent task from being started again
+            }
+
+            completedTasks++;
+            localStorage.setItem('completedTasks', completedTasks);
+            initializeTasks();
+
+            // Redirect to the task details page
+            window.location.href = 'vip1task.html';
+        });
+
+        // Check and reset tasks at page load
+        checkAndResetTasks();
+        initializeTasks();
+    </script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orders - Task History</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f4f4f4;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .task-section {
+      flex: 1;
+      margin: 20px;
+      overflow-y: auto;
+    }
+
+    .task-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    .task-table th, .task-table td {
+      border: 1px solid #ddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    .task-table th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+
+    .task-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-around;
+      background: #f4f4f4;
+      padding: 10px 0;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer-btn {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+
+    .footer-btn:hover {
+      color: #007BFF;
+    }
+
+    @media (max-width: 768px) {
+      .task-table th, .task-table td {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <img src="WFH.png" alt="WFH Logo" class="logo-img">
+        <h1>Task History</h1>
+      </div>
+    </header>
+
+    <main class="task-section">
+      <h2>Completed Tasks</h2>
+      <table class="task-table" id="completed-tasks">
+        <tr>
+          <th>Task ID</th>
+          <th>Level</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Date Completed</th>
+        </tr>
+      </table>
+
+      <h2>Pending Tasks</h2>
+      <table class="task-table" id="pending-tasks">
+        <tr>
+          <th>Task ID</th>
+          <th>Level</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Reason</th>
+        </tr>
+      </table>
+    </main>
+
+    <footer class="footer">
+      <button class="footer-btn" onclick="navigateToHome()">Home</button>
+      <button class="footer-btn" onclick="navigateToProfile()">Profile</button>
+    </footer>
+  </div>
+
+  <script>
+    // Initialize task data
+    const taskData = {
+      completed: JSON.parse(localStorage.getItem("completedTasks")) || [],
+      pending: JSON.parse(localStorage.getItem("pendingTasks")) || []
+    };
+
+    // Function to save task data
+    function saveTasks() {
+      localStorage.setItem("completedTasks", JSON.stringify(taskData.completed));
+      localStorage.setItem("pendingTasks", JSON.stringify(taskData.pending));
+    }
+
+    // Example: Add a new completed task
+    function addCompletedTask(id, level, description, amount, date) {
+      taskData.completed.push({ id, level, description, amount, date });
+      saveTasks();
+    }
+
+    // Example: Add a new pending task
+    function addPendingTask(id, level, description, amount, reason) {
+      taskData.pending.push({ id, level, description, amount, reason });
+      saveTasks();
+    }
+
+    // Populate completed tasks
+    const completedTable = document.getElementById("completed-tasks");
+    taskData.completed.forEach(task => {
+      const row = `<tr>
+        <td>${task.id}</td>
+        <td>${task.level}</td>
+        <td>${task.description}</td>
+        <td>NPR ${task.amount}</td>
+        <td>${task.date}</td>
+      </tr>`;
+      completedTable.innerHTML += row;
+    });
+
+    // Populate pending tasks
+    const pendingTable = document.getElementById("pending-tasks");
+    taskData.pending.forEach(task => {
+      const row = `<tr>
+        <td>${task.id}</td>
+        <td>${task.level}</td>
+        <td>${task.description}</td>
+        <td>NPR ${task.amount}</td>
+        <td>${task.reason}</td>
+      </tr>`;
+      pendingTable.innerHTML += row;
+    });
+
+    // Navigation functions
+    function navigateToHome() {
+      window.location.href = "WFH online.html";
+    }
+
+    // Example usage
+    // Uncomment the lines below to simulate task additions (only run once for testing)
+    // addCompletedTask("C001", "VIP1", "Complete 5 reviews", 500, "2025-01-01");
+    // addPendingTask("P001", "VIP2", "Watch 3 videos", 300, "Insufficient Balance");
+  </script>
+</body>
+</html>

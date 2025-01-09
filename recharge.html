@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recharge Account - WFH</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .recharge-form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-group {
+      margin: 15px 0;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .form-group input:focus {
+      border-color: #007BFF;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .message {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
+    }
+
+    .back-btn {
+      margin-top: 10px;
+      display: block;
+      color: #007BFF;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form class="recharge-form" onsubmit="rechargeBalance(event)">
+      <h2>Recharge Your Account</h2>
+      <div class="form-group">
+        <label for="recharge-code">Enter Code:</label>
+        <input type="text" id="recharge-code" placeholder="Enter your code" required>
+      </div>
+      <button type="submit" class="submit-btn">Recharge Now</button>
+      <p class="message" id="message"></p>
+      <a href="WFH online.html" class="back-btn">Back to Dashboard</a>
+    </form>
+  </div>
+
+  <script>
+    function rechargeBalance(event) {
+      event.preventDefault();
+      const rechargeCode = document.getElementById("recharge-code").value.trim();
+
+      // Define recharge amounts for each set of codes
+      const rechargeAmountMap = {
+        '800': [
+          "zdatSTVJ", "dv1vD6v4", "mBkZvYJJ", "D9zLEk04", "ghBFM9Og", "Jnh7vjIt", "T0D3hsGl", "mzmBfEtJ", "He8JL3Oo", "U2WqKzXp", "tTkQsdMV", "xjifOScu", "QfPZnH1S", "938IeAVJ", "eUNPkegd", "mQJV67Zg", "qYSh9KTT", "YIUAAWZP", "tyXb9B09", "ravsBrcX", "fmmbQID4", "7ZmEsoM2", "NGoGZORU", "tgIGxUug", "Ul69MBri", "l0IAzAL7", "3F4rkZ9J", "9s9JG03m", "UuQibbTi", "qTVb34JE", "tBZ3smjE", "M7GDKQNE", "vAflTUxa", "jHms21xq", "evWKInYP", "4Ua2UJyB", "PEmbKbYa", "RlAl14CR", "amBCxHHt", "6UBGUGCE", "2e07nAZc", "yGSX4gEC", "nbzaj3aW", "gWsA386G", "2aOaUUFe", "rG4DiDJu", "aQnWezMi", "nn4KjXHC", "7ldtGaOf", "i0w9vxaJ", "OuWkfzaa", "bM4eiErm", "Ain7LHhI", "dx6gTOYW", "cueLvw18", "638p0M6R", "eoJLMLJf", "k0MvDz1U", "K8WCHcLt", "o6NWYmzu", "jngWiR7v", "MQKhLLfF", "zTyzmx0l", "5BV4Xbcr", "Ja0xmgDk", "WksSfKor", "Xyl2eWoz", "7eDGBS8M", "cNDhWPCr", "vSUKSh0M", "NLtcsjcC", "3ESCtCAO", "DMV7hWO2", "3AdxV1sP", "RBSMyymv", "eSBtcuKF", "nWFUdaXH", "vajnx3gb", "HbvceQdR", "Nlmo6M0T", "CHMChl9t", "N48pqO4E", "NG6a4fNT", "cq1XaM0s", "MGeRUurb", "q6SCfsCO", "0L94K7je", "WdgjnCXK", "hwCdqEBC", "VLZVHlFf", "Twv1FPTP", "oFy7SYeu", "eoSqgW42", "4vCd6TBB", "PkSgcNne", "3gToIP7k", "8i3ZwUUF", "2E5bat35", "utaUhRDB", "ceQBqDM5", "YpeiF6yx", "GqqYjpLY", "VQO5qeBJ", "bdiRofR9", "cUyTdVZn", "vd4xwsWT", "9yRjPPp5", "ahciYMyD", "wiRNNWNg", "KOOS3Qs2", "gVurf1YQ", "N4KuNqe8", "BxjPDiHF", "R3ZfCqtP", "xcZ8VvOL", "Kn86TJCU", "JUnYKHln", "luS7Px3B", "VJUnzEVq", "4jnDnpMv", "whVII9Ad", "YPBMexpl", "WMde2zKH", "e9b017v1", "s5NKDAFs", "GqwNtNvX", "NomTAFFy", "teA8Nir9", "DM1itLmk", "QsB0bcSz", "F2v13seZ", "nccYo8tw", "GTHFriLD", "6fa68dEC", "8HHW2NGn", "CE7WHX0N", "BOxnkiIS", "OLoBZWi4", "ayvmWSyP", "yGFUA06g", "lgzwrRjg", "CBKuWG68", "lo6QmMMD", "vkB89lWH", "OP8D67Id", "zUcm1M6L", "raUypsTF", "yhuSOWfD", "wfyCs5q0", "i0PVrksk", "FdAcb2Ff", "DFj4NjDe", "32E3aX2v", "M0q7MiTM", "5GVDmBx0", "OSbzmCXp", "HtSpI7p5", "51mHJqgu", "sntbMCxe", "taAuoj6b", "WTiU3YAs", "DQm3LdSW", "LMPONO2k", "fCvg9f3N", "PzKuMS6v", "LV8HiDAN", "vjdS5f7B", "0tLGJZtz", "eZ6UTYkD", "BHM0JRt2", "pXhM0nsY", "dJKgay3l", "VpwWRhpP", "L8qXABEk", "SvaUwsjy", "MBMl6eiI", "dXtlchAu", "UXDTfUoV", "atmHeCNF", "PD59bg4E", "qZXsxTHw", "CrLx4664", "Ifq8sZv6", "Al3x0ZdQ", "mepBBqpT", "dSh68Q5W", "ePxvid82", "HsnjP9tX", "E6dzVQYa", "AZerP7l1", "Wv9q2twD", "LYqVTcK4", "SCXjOpa4", "C9KzgsXV", "oho1uv9q", "AS9IoBNa", "ewDufK2y", "3oxtoVQD", "YJFYVQH4", "Bi0bUTDD", "KLkl4Gk3", "wFkq3f12", "g0KvWEon", "GFyyDFiw", "vSrh197W", "Pad6lRWF", "pHx3LpAF", "SNI10L2U", "5q1q21fP", "gVkzf02n", "53tLzyma", "BTLvWsmE", "iBHDLQ89", "RqTlQyBd", "FMl2y7Hn", "96pgANji", "DpbbaFFw", "2q9YndMt", "OwI5p2A4", "759VrXCN", "7GapChww", "lZYJc4u7", "o3abzDg0", "dBMBpEYK", "anROXsiL", "u9KEe4MA", "E4YwuLlL", "LM2xVqlv", "lDhsNbPw", "61xAPxKF", "OM2mjrod", "zyNc42WC", "2ZBJ9Plo", "kyEV3Q9n", "HAunYbPt", "J0bNbcax", "4DIaeb2w", "7jOgb9u8", "3WR7ADz8", "oZdrHPu6", "odXzRGEF", "2BwOMrEX", "peJ267YE", "ErcUWw25", "AdLsai3R", "aNyMI8yj", "umpa3Aob", "5aI8EsTR", "rx82ZsO5", "Alg4T9jC", "KM01QFmC", "4p8lzHAq", "SrihOfEl", "qAVLLbWQ", "FnkncHD3", "emlzmOCc", "3NtiFvXO", "BtkFtQ9Y", "XJiCeqsG", "eHS0kqcE", "FzTu01Hu", "1uXrZSLL", "dJR9ATmJ", "gEFFdM1g", "uzKZjXr6", "CAgs9DXn", "iEXubNq2", "Ypbywiqt", "5JZGRTFt", "eOnI8OQj", "H6dlJqU6", "p9wB9LH6", "aqDUiJM5", "qEoSuy5U", "EPEasN82", "77Fdi5vL", "tzv6mhL3", "11GaGV9Q", "gxFI4fsl", "3J0Byumd", "AAuoIvJ4", "lgGKc1Dy", "ctpenDkr", "51yKR9mQ", "xY4C1JN8", "bs2cECFM", "rdOQr68k", "RAONfYU7", "lNRS8SCy", "ESZURhWQ", "iXwf5An5", "IS5batoc", "iR5jZzqt", "sqJFZ3jp", "zyojfQDX", "olWDjzN0", "vi5dCCEz", "jnxJv8MP", "4ar2Khit", "SRkH25w9", "Pbakgmnk", "oz518U6V", "D7EsT7To", "0aFA67RL", "vPLcIFkc", "IH64NgUi", "d6Sdt8EB", "V4Tvw3uO", "1JS3FkZG", "DUMqfmip", "ZvpGhhMy", "p3QcPWkb", "F25aaCnC", "9MnGfo3J", "5aPo6PBG", "qyLixCN1", "UOpzkCYj", "8YB8kD6I", "KVERTWht", "nB3ljgMH", "jSogeyDp", "rzskmaFE", "r7Ts3eSH", "M4H7duDo", "ScEDvuH4", "HqrjkXMN", "uBous6gP", "nJH9JdJU", "3xKsoYqM", "0UnWhGCC", "aS3t0QPg", "VqKuPkRN", "mXqstTgj", "4kooAGCX", "Skj5vgLP", "4BpOBSxl", "BEGnp80D", "gRWadBvy", "z2qHB9RT", "ZnYl2OyE", "SEj3tIZV", "KAYnzXLy", "cben4EEl", "KK7761M7", "0LdlUGxd", "cf4a91gC", "IJQxocPK", "9Pk01BAD", "gTVqzmmd", "SDjOni7H"
+         ],
+        '4000': [
+          "CZnqd4VW", "YzftJT8a", "Nc1YIVq7", "TpYSi15f", "vPJ1p8cH", "TzvftFiy", "qVWtnCx9", "5GrWP9Ca", "eOwNrrFg", "8Sdseahj", "d4cPbf84", "gYhYOGA5", "knzUiGVR", "SFiZAqks", "y51Xy9tJ", "RBIQ8wuy", "BNn4fCrU", "2T0EEj1Q", "XfD1dOpR", "fOdEQFZ6", "GMu5xRTx", "RP4ceQ79", "e3HSzwz3", "G2rKR5AN", "COnsUNQq", "7Czb4Gh2", "CdwPRnxM", "zFFfL2Ur", "cp1Kn3SJ", "ndzlfGG9", "UQnfV1gw", "Ya6XZRXd", "VcL72VPG", "iACWf3TB", "nxoNFZoA", "WfT4iSeI", "nLSF7W42", "QbfWcYaL", "CDWlVsVi", "41WP5qUo", "8MSlGHBY", "aiPrtpph", "kYO5KcZQ", "KmqiyZoZ", "3ElmWVOg", "wLHhBuT2", "OkQcYHAz", "zDKeMQhS", "8L6IBWvK", "ny2dV7T3", "r6r9PbY8", "5967jXb7", "KpmkgwOF", "aymciT1N", "PeeXR3gN", "bzoF0XMd", "4b4rfLTp", "Vjl9bnqZ", "v79pkPNO", "mstb0ic6", "lkuMfwoc", "VTN93boQ", "XQOWQtZQ", "YYmHlKEJ", "a4ZDca4u", "DPeVNRGn", "jc1N5DIc", "oTIS5yzT", "DwVNCKha", "ZJmY3kRL", "0vIqZ3LL", "XXbwHyyY", "nrIKdrdt", "6QGkYpLH", "GXkVGB3k", "XAn8hqUN", "kbC8BkpR", "OLjmbT6D", "f0TFjbmt", "Z4ltADF2", "LkydXcTo", "hQXMoDNm", "9nok1nCY", "5eTTJONE", "GYUfhQZh", "KAAR8L7O", "u4OUtOCC", "jrej1qJu", "Fc8k4o5u", "dG96cwK9", "xk4BZw4l", "XHbmbOnM", "4RUQm2iH", "ovFxEWJx", "La0orX4f", "golnpn70", "6XDwfjYI", "La8b9cOr", "tgN39Pmb", "g4KlImce"
+        ],
+        '9000': [
+          "26ZQwIcD", "zSagLyET", "YJxeyryj", "yWZj3mKU", "8tZtfY9Q", "zSjei7i1", "yZlSszn5", "4KFUDY0c", "cESYpILR", "Km1LdX8u", "o9F5sM7d", "xaPv1ucA", "2B1yo3zZ", "sejNt2MC", "4oKpMJm0", "zIIDuAcM", "UNvl04HO", "SDkcMpk1", "xTNKYY4G", "OidO2ugc", "tQ03xVvX", "pC0DUPwC", "23hJX0qv", "b1OG8J1g", "QJTXNNDz", "dOBklZll", "upXT9jnZ", "z9ShQXBX", "mUMD6baS", "Osy7jNKU", "jdu5cQ6x", "SPVLgtHC", "KAnHuyXU", "Bh72rh2U", "IaOk0d66", "yx8rLU4I", "AIs1DCNI", "Y6iLgCY4", "2q1msT28", "6FqrXVxl", "vxQgCBsA", "hDHfJZ7b", "nHVp8jrb", "g8x9BDSF", "9diUT0gS", "ghooNn5Z", "vx0BMK4E", "AFpl4ku6", "v5fcm5aa", "w9tK9VtL", "fJtbSH7I", "lz0wsV4C", "JsJc0n6c", "WWXHfNtL", "HCSRZQo7", "KGBBGTWQ", "13JY9GPS", "qzhZ67kN", "4AVq8FmJ", "AyQz4u42", "nykVCuqW", "5evpcJkw", "Tjdz2npX", "PKY4mfnM", "YmhXZxfJ", "bmKAcUWL", "mJPNHkMl", "7klwck3I", "7mAuwmpw", "MZ4pP7R2", "tH5LR8rt", "7RjAiBf4", "ZtnNQ1rv", "1iUrMaRP", "bG5hdStK", "xXOKFRxK", "eKtKuQ2A", "Xhml5raW", "93mldIeX", "yP6FiiXF", "6BdB0D1H", "amw4OxRv", "dbaAKDaf", "KbSOukfp", "3xZkPDQz", "d5NvKEGA", "uRAaZ0mh", "AtGrhFFl", "OWns9B1W", "uP3FrcDQ", "BvI2oLG7", "AO33c4qo", "UrmusBfL", "qraf8NgG", "QJeGVJiY", "stLrWCec", "8RIWfPpd", "QsiFyI6N", "qZdVNoxb"
+        ],
+        '12000': [
+          "uEF6au2R", "IEjeRWCf", "xg2FSzFA", "Zi81ct0i", "buTFTyJq", "2NYrZmb7", "K3zXrUGg", "6BL74oky", "mPL8aJ2R", "zch8O4e0", "usCq3VrA", "EUNMJQQS", "zaHlZxnf", "PxDfN20G", "wEK0o3az", "BGrQDTFT", "7mi7tAoi", "oPvsfTZc", "bBXvKuCI", "iVKEvr7i", "bKKFEJnp", "9IWCTQlA", "6JDomGP7", "XRyoymVr", "kcLiaao5", "ZwUBZHHO", "V0rUju3R", "wAjCiSw8", "6ih9Glbe", "qlN1DNPh", "6vtFPP2O", "npbxqEBW", "2Obl2zMy", "LwQ2txqs", "ovN2dndn", "N9Rcgv6W", "dPMWSeEq", "3QQP1ubi", "ETDrRmnJ", "vvy5Dg3e", "7LxjaH1Z", "2mENtYGr", "bMxqCrXA", "ZXvLeTDc", "oGeens3z", "O2UViBlG", "w2kINUIS", "PhRIoQV5", "rMZnJWnz", "KsUafz26", "mE28BPGP", "CUqfLlJ2", "2NBXGK4v", "P8S5wdiU", "JXfDTVth", "ArwIOSmA", "mKnCaFGr", "SnHON8zP", "Mh1V0sVk", "1E1NrLr9", "vXKh8Ckt", "MKYMLF6v", "NQt9XOAG", "eo0lUktd", "YXjdqzd1", "qsAMGIcC", "ok9kYa1J", "R9eSOxVS", "bZtwYw9V", "0MABlWx6", "CzdQI4iZ", "tFcKGeda", "mDh60EFj", "NVX3CxVb", "bJnWTBoj", "zKxjbVzl", "1FtGGPDI", "UvYodKau", "bL5mWRRS", "cV8KoHRm", "ITzOYSVB", "33HdBO0h", "KzRi5OOr", "IMc82rwo", "rpyZ55xj", "yiJZV8Vs", "8AmLzQu0", "fpmmtzuG", "Pe0hEhgk", "KivLRzYi", "hzqxct7F", "be0C3MFq", "qVkyBcgN", "Nbyzghas", "ENerYPlo", "eoLvE1R4", "RaVW4wgh", "x4O04EMB"
+        ]
+      };
+
+      // Retrieve previously used codes from localStorage
+      let usedCodes = JSON.parse(localStorage.getItem("usedCodes")) || [];
+
+      // Check if the code has already been used
+      if (usedCodes.includes(rechargeCode)) {
+        document.getElementById("message").textContent = "This code has already been used.";
+        document.getElementById("message").style.color = "red";
+        return;
+      }
+
+      // Check the recharge code and update the balance
+      let rechargeAmount = 0;
+      if (rechargeAmountMap['800'].includes(rechargeCode)) {
+        rechargeAmount = 800;
+      } else if (rechargeAmountMap['4000'].includes(rechargeCode)) {
+        rechargeAmount = 4000;
+      } else if (rechargeAmountMap['9000'].includes(rechargeCode)) {
+        rechargeAmount = 9000;
+      } else if (rechargeAmountMap['12000'].includes(rechargeCode)) {
+        rechargeAmount = 12000;
+      }
+
+      // If recharge amount is valid, update balance and mark code as used
+      if (rechargeAmount > 0) {
+        let currentBalance = parseFloat(localStorage.getItem("updatedBalance")) || 250; // Default balance
+        const newBalance = currentBalance + rechargeAmount;
+        localStorage.setItem("updatedBalance", newBalance);
+        
+        // Store the code as used
+        usedCodes.push(rechargeCode);
+        localStorage.setItem("usedCodes", JSON.stringify(usedCodes));
+
+        document.getElementById("message").textContent = `Recharge successful! Your new balance is NPR ${newBalance.toFixed(2)}`;
+        document.getElementById("message").style.color = "green";
+      } else {
+        document.getElementById("message").textContent = "Invalid recharge code.";
+        document.getElementById("message").style.color = "red";
+      }
+    }
+  </script>
+</body>
+</html>

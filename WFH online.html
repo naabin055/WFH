@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WFH Login & Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .logo img {
+      max-width: 70px;
+      margin-bottom: 15px;
+    }
+
+    .app-name {
+      font-size: 26px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    .form-group input:focus {
+      border: 1px solid #4CAF50;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      background: linear-gradient(90deg, #4CAF50, #81C784);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #388E3C, #66BB6A);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f4f4f4;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo-img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .user-info .icon {
+      height: 30px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .banner {
+      flex: 1;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .banner-img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      margin: 20px 0;
+    }
+
+    .action-btn {
+      padding: 10px 20px;
+      background-color: #ffd3c4;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin: 10px;
+    }
+
+    .action-btn:hover {
+      background-color: #ffa384;
+    }
+
+    .balance-info {
+      display: flex;
+      justify-content: space-around;
+      margin: 10px 20px;
+    }
+
+    .info-card {
+      text-align: center;
+    }
+
+    .info-card p {
+      margin: 5px 0;
+    }
+
+    .info-card p:nth-child(2) {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .user-info-section {
+      text-align: center;
+      padding: 20px 10px;
+      margin: 20px;
+      background: #e0f7fa;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-info-section p {
+      margin: 10px 0;
+    }
+
+    .user-id {
+      font-size: 24px;
+      font-weight: bold;
+      color: #00796b;
+    }
+
+    .welcome-section {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00796b;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .footer {
+      display: flex;
+      justify-content: space-around;
+      background: #f4f4f4;
+      padding: 10px 0;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .footer-btn {
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      color: #333;
+      transition: color 0.3s ease;
+    }
+
+    .footer-btn:hover {
+      color: #007BFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container" id="login-container">
+    <div class="logo">
+      <img src="WFH.png" alt="WFH Logo">
+    </div>
+    <div class="app-name">Welcome to WFH</div>
+    <form id="login-form" onsubmit="login(event)">
+      <div class="form-group">
+        <label for="login-id">User ID</label>
+        <input type="text" id="login-id" placeholder="Enter your user ID" required>
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" placeholder="Enter your password" required>
+      </div>
+      <button type="submit" class="btn">Log In</button>
+    </form>
+  </div>
+
+  <div class="container" id="dashboard-container" style="display:none;">
+    <header class="header">
+      <div class="logo">
+        <img src="WFH.png" alt="WFH Logo" class="logo-img">
+        <h1>WFH</h1>
+      </div>
+      <div class="user-info">
+        <img src="notification.png" alt="Notifications" class="icon">
+        <img src="profile.png" alt="Profile" class="icon">
+      </div>
+    </header>
+
+    <main class="main-content">
+      <section class="banner">
+        <img src="banner.png" alt="Banner" class="banner-img">
+      </section>
+
+      <section class="actions">
+        <button class="action-btn" onclick="navigateToRecharge()">Recharge Now</button>
+        <button class="action-btn" onclick="navigateToWithdraw()">Quick Cash Withdraw</button>
+        <button class="action-btn">Invite Friends</button>
+        <button class="action-btn" onclick="navigateToTask()">Task</button>
+      </section>
+
+      <section class="balance-info">
+        <div class="info-card">
+          <p class="welcome-section">Welcome to WFH</p>
+        </div>
+        <div class="info-card">
+          <p>Account Balance</p>
+          <p id="account-balance">Loading...</p>
+        </div>
+      </section>
+
+      <section class="user-info-section">
+        <p>User ID</p>
+        <p class="user-id" id="user-id">Loading...</p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <button class="footer-btn" onclick="navigateToHome()">Home</button>
+      <button class="footer-btn" onclick="navigateToOrders()">Orders</button>
+      <button class="footer-btn" onclick="navigateToProfile()">My Profile</button>
+    </footer>
+  </div>
+
+  <script>
+    const users = [
+      { id: "12345678", password: "AB7D4G" },
+{ id: "87654321", password: "G4H8J2" },
+{ id: "23456789", password: "K9L7Q3" },
+{ id: "98765432", password: "Y3N5D2" },
+{ id: "34567890", password: "E6W8R7" },
+{ id: "45678901", password: "Q2T9Y6" },
+{ id: "56789012", password: "Z4R6P8" },
+{ id: "67890123", password: "T3F8L7" },
+{ id: "78901234", password: "H5K9J2" },
+{ id: "89012345", password: "M6R4N7" },
+{ id: "90123456", password: "W2P8K3" },
+{ id: "10234567", password: "N7Q5D4" },
+{ id: "21345678", password: "F8L3H6" },
+{ id: "32456789", password: "J6K9T2" },
+{ id: "43567890", password: "P4W7Z8" },
+{ id: "54678901", password: "Q3Y6N5" },
+{ id: "65789012", password: "D2K8R4" },
+{ id: "76890123", password: "E5L9P7" },
+{ id: "87901234", password: "R6H4T8" },
+{ id: "98012345", password: "M7N3K2" },
+{ id: "19203456", password: "Z8T5Q6" },
+{ id: "20314567", password: "L3F9J7" },
+{ id: "31425678", password: "H6K4R2" },
+{ id: "42536789", password: "P5T8W3" },
+{ id: "53647890", password: "Y9D7L4" },
+{ id: "64758901", password: "Q2N6R8" },
+{ id: "75869012", password: "M3K7F9" },
+{ id: "86970123", password: "W8L4T5" },
+{ id: "97081234", password: "Z9P3Q6" },
+{ id: "08192345", password: "D7R5H2" },
+{ id: "19203456", password: "E4T8N3" },
+{ id: "20314567", password: "J6K9W5" },
+{ id: "31425678", password: "F7M3R4" },
+{ id: "42536789", password: "L8P6D5" },
+{ id: "53647890", password: "Q9T2K7" },
+{ id: "64758901", password: "R4H6N8" },
+{ id: "75869012", password: "E5J9P3" },
+{ id: "86970123", password: "Z6M8K7" },
+{ id: "97081234", password: "N3T4F5" },
+{ id: "08192345", password: "Y9R2P8" },
+{ id: "19203456", password: "M6K5L7" },
+{ id: "20314567", password: "H8Q3N2" },
+{ id: "31425678", password: "D7R9T6" },
+{ id: "42536789", password: "P4F3K8" },
+{ id: "53647890", password: "L5M9Q2" },
+{ id: "64758901", password: "Z7H6R3" },
+{ id: "75869012", password: "E2T9N5" },
+{ id: "86970123", password: "K4L8F3" },
+{ id: "97081234", password: "W6P7J9" },
+{ id: "08192345", password: "R8M3Q5" },
+{ id: "19203456", password: "Y9D7T2" },
+{ id: "20314567", password: "P4L6R8" },
+{ id: "31425678", password: "E5N3H7" },
+{ id: "42536789", password: "M9Q6K2" },
+{ id: "53647890", password: "W8T4Z5" },
+{ id: "64758901", password: "K7R2P9" },
+{ id: "75869012", password: "L6N8D3" },
+{ id: "86970123", password: "F3Q9H7" },
+{ id: "97081234", password: "Z5M2K8" },
+{ id: "08192345", password: "Y4R7T9" },
+{ id: "19203456", password: "W8P6N3" },
+{ id: "20314567", password: "D9L3H2" },
+{ id: "31425678", password: "K5T7R6" },
+{ id: "42536789", password: "Q8N9M3" },
+{ id: "53647890", password: "F2R6P7" },
+{ id: "64758901", password: "J3K4T9" },
+{ id: "75869012", password: "M7L8R2" },
+{ id: "86970123", password: "W5N3H6" },
+{ id: "97081234", password: "Z8Q7P4" },
+{ id: "08192345", password: "E6T9M2" },
+{ id: "19203456", password: "K4N8R5" },
+{ id: "20314567", password: "P3L7D9" },
+{ id: "31425678", password: "Q6F8H2" },
+{ id: "42536789", password: "Y9T5K3" },
+{ id: "53647890", password: "M2P6N7" },
+{ id: "64758901", password: "R4L8J9" },
+{ id: "75869012", password: "D3T9W5" },
+{ id: "86970123", password: "K8N2F7" },
+{ id: "97081234", password: "Z5R3H6" },
+{ id: "08192345", password: "W7T8L9" },
+{ id: "19203456", password: "E2M3K6" },
+{ id: "20314567", password: "Y8F9R4" },
+{ id: "31425678", password: "K7T6P2" },
+{ id: "42536789", password: "N5D8Q9" },
+{ id: "53647890", password: "R3H7M6" },
+{ id: "64758901", password: "F9P6L2" },
+{ id: "75869012", password: "Z8T4N3" },
+{ id: "86970123", password: "K6R5M7" },
+{ id: "97081234", password: "E3N9T2" },
+{ id: "08192345", password: "W7L4F8" },
+{ id: "19203456", password: "Z9P3R6" },
+{ id: "20314567", password: "D4T8M5" },
+{ id: "31425678", password: "Y5N7K9" },
+{ id: "42536789", password: "K2L6F3" },
+{ id: "53647890", password: "R9H8P7" },
+{ id: "64758901", password: "E6M2T5" },
+{ id: "75869012", password: "Z4K9R3" },
+{ id: "86970123", password: "W8N3F6" },
+{ id: "97081234", password: "R7L5M9" },
+{ id: "08192345", password: "T9H6N2" },
+{ id: "19203456", password: "M3P8D5" },
+{ id: "20314567", password: "Y7R9K4" },
+{ id: "31425678", password: "E2T5N3" },
+{ id: "42536789", password: "K8F6W9" },
+{ id: "53647890", password: "Z9M4R5" },
+{ id: "64758901", password: "P7L3H8" },
+{ id: "75869012", password: "T5N2K6" },
+{ id: "86970123", password: "F8M9R7" },
+{ id: "97081234", password: "Q2N4T5" },
+{ id: "08192345", password: "R6P3K7" },
+{ id: "19203456", password: "M9F2L8" },
+{ id: "20314567", password: "W7Q6T5" },
+{ id: "31425678", password: "Y8R9P3" },
+{ id: "42536789", password: "D5K8M2" },
+{ id: "53647890", password: "L3T7N9" },
+{ id: "64758901", password: "K2F4W8" },
+{ id: "75869012", password: "P6N9M5" },
+{ id: "86970123", password: "R7K5M6" },
+{ id: "97081234", password: "E4T9D2" },
+{ id: "08192345", password: "M6W7R5" },
+{ id: "19203456", password: "L9N8Q2" },
+{ id: "20314567", password: "K3F4P6" },
+{ id: "31425678", password: "T5M7R9" },
+{ id: "42536789", password: "W8K9N2" },
+{ id: "53647890", password: "F4M2D7" },
+{ id: "64758901", password: "P9K5L3" },
+{ id: "75869012", password: "R2F7T9" },
+{ id: "86970123", password: "M8N3L5" },
+{ id: "97081234", password: "Z9P4R7" },
+{ id: "08192345", password: "T7W9K2" },
+{ id: "19203456", password: "M9F3P6" },
+{ id: "20314567", password: "K8Q9D2" },
+{ id: "31425678", password: "L6P5R8" },
+{ id: "42536789", password: "F7M3K9" },
+{ id: "53647890", password: "N5P6T2" },
+{ id: "64758901", password: "Z8R9L7" },
+{ id: "75869012", password: "K6M9F2" },
+{ id: "86970123", password: "P9W3R8" },
+{ id: "97081234", password: "L5T6N9" }
+    ];
+
+    function login(event) {
+      event.preventDefault();
+      const id = document.getElementById('login-id').value;
+      const password = document.getElementById('login-password').value;
+
+      const user = users.find(u => u.id === id && u.password === password);
+
+      if (user) {
+        localStorage.setItem('userID', id);
+        let balance = parseFloat(localStorage.getItem('updatedBalance')) || 250.00;
+        localStorage.setItem('updatedBalance', balance.toFixed(2));
+
+        document.getElementById('login-container').style.display = 'none';
+        document.getElementById('dashboard-container').style.display = 'block';
+
+        document.getElementById('user-id').innerText = id;
+        document.getElementById('account-balance').innerText = `NPR ${balance.toFixed(2)}`;
+      } else {
+        alert('Invalid User ID or Password');
+      }
+    }
+
+     function navigateToRecharge() {
+      window.location.href = "recharge.html";
+    }
+
+    function navigateToWithdraw() {
+      window.location.href = "withdraw.html";
+    }
+
+    function navigateToTask() {
+      window.location.href = "task.html";
+    }
+
+    function navigateToOrders() {
+      window.location.href = "order.html";
+    }
+  </script>
+</body>
+</html>
